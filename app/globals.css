@@ -1,0 +1,231 @@
+/* CSS Reset to ensure consistent styling */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+  border-radius: 0.5rem; /* Fallback if Tailwind classes don't apply */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 210 100% 50%;
+  --primary-light: 210 100% 70%;
+  --primary-dark: 210 100% 40%;
+  --secondary: 240 60% 60%;
+  --accent: 180 100% 50%;
+  --background-light: 0 0% 100%;
+  --background-dark: 222 47% 11%;
+  --text-light: 0 0% 98%;
+  --text-dark: 222 47% 11%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: var(--background-dark);
+  --foreground: var(--text-light);
+}
+
+@layer base {
+  body {
+    @apply text-slate-900 dark:text-slate-50;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  }
+
+  button {
+    @apply rounded-lg;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Airplane animations */
+@keyframes fly-straight {
+  0% {
+    transform: translateX(0) rotate(var(--rotate, 30deg));
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) rotate(var(--rotate, 30deg));
+    opacity: 0;
+  }
+}
+
+@keyframes fly-curve {
+  0% {
+    transform: translate(0, 0) rotate(var(--rotate, 30deg));
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(60vw, -10vh) rotate(var(--rotate, 30deg));
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(120vw, 0) rotate(var(--rotate, 30deg));
+    opacity: 0;
+  }
+}
+
+@keyframes fly-zigzag {
+  0% {
+    transform: translate(0, 0) rotate(var(--rotate, 30deg));
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  25% {
+    transform: translate(30vw, -5vh) rotate(var(--rotate, 30deg));
+  }
+  50% {
+    transform: translate(60vw, 5vh) rotate(var(--rotate, 30deg));
+  }
+  75% {
+    transform: translate(90vw, -5vh) rotate(var(--rotate, 30deg));
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(120vw, 0) rotate(var(--rotate, 30deg));
+    opacity: 0;
+  }
+}
+
+.fly-straight {
+  animation: fly-straight linear infinite;
+  --rotate: attr(data-rotate);
+}
+
+.fly-curve {
+  animation: fly-curve linear infinite;
+  --rotate: attr(data-rotate);
+}
+
+.fly-zigzag {
+  animation: fly-zigzag linear infinite;
+  --rotate: attr(data-rotate);
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500;
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20 dark:border-slate-700/30;
+}
+
+/* Add additional responsive styles to improve mobile and tablet experience */
+
+/* Improve responsive typography */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Improve iPad experience */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 640px) {
+  button,
+  .btn-primary,
+  .btn-secondary,
+  a.btn-primary,
+  a.btn-secondary,
+  input[type="submit"] {
+    min-height: 44px;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Improve spacing on mobile */
+@media (max-width: 640px) {
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .py-16 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .mb-16 {
+    margin-bottom: 2rem;
+  }
+
+  .gap-12 {
+    gap: 1.5rem;
+  }
+}
